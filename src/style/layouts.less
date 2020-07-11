@@ -1,0 +1,62 @@
+.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
+}
+
+.clearfix {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+.full-conainer {
+  position:fixed;
+  left:0;top:0;right:0;bottom:0;
+}
+.row-container,.column-container {
+  display: flex;
+}
+.column-container { 
+  flex-direction: column;
+}
+.main-axis-center-container {
+  justify-content: center;
+}
+.main-axis-space-between-container {
+  justify-content: space-between;
+}
+.cross-axis-center-container {
+  align-items: center;
+}
+.wrap-container {
+  flex-wrap: wrap;
+  align-content: stretch;
+}
+.border-box-content{
+  display: flex;
+}
+.box-content-container {
+  flex:1;
+  padding:10px 20px 20px;
+  position: relative;
+}
+
+.padding-top-60 {
+  padding-top: 60px;
+}
+.portion-1 {
+  flex:1;
+}
+.portion-2{
+  flex:2;
+}
+.portion-3{
+  flex:3;
+}
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+  
+}

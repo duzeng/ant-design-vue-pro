@@ -1,0 +1,5 @@
+export const descTextColor = 'rgb(45,193,255)'
+export const lightNumberColor = 'rgb(253,224,56)'
+export const mainThemeColor = 'rgb(2, 160, 249)'
+export const transparentColor = 'rgb(0,0,0,0)'
+export const infoTextColor = 'rgb(217,247,255)'

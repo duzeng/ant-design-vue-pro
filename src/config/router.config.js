@@ -326,6 +326,15 @@ export const asyncRouterMap = [
       */
     ]
   },
+  // big show
+  {
+    path: '/show',
+    name: 'show',
+    component: () => import('@/views/show/Show'),
+    hidden: true,
+    hideChildrenInMenu: true
+
+  },
   {
     path: '*', redirect: '/404', hidden: true
   }
