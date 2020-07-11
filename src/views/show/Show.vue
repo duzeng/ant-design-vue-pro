@@ -23,6 +23,6 @@ export default {
 <style lang="less" scoped>
   .bg-container{
     background-size: 100% 100%;
-    background-image: url('../../assets/bg.837e99ea.png');
+    background-image: url('../../assets/background-show.png');
   }
 </style>

@@ -30,26 +30,34 @@
     </div>
     <div class="portion-3 column-container">
       <dv-border-box-8 class="portion-2" :color="[styles.mainThemeColor,styles.transparentColor]" title="综合展示信息">
-        <div class="box-content-container map-container">
+        <div class=" box-content-container map-container">
           <TabControl
             class="map-tab"
-            :datas="['项目地图','数据地图']"
-            :defaultTabIndex="defaultMapTabIndex"
+            :datas="['项目地图','数据地图','九大模块']"
+            :defaultTabIndex="centralModuleIndex"
             @tab-changed="mapTabChangedHandler"/>
           <ve-bmap
+            v-if="centralModuleIndex<=1"
             width="100%"
             height="100%"
             v-bind="mapConfig"
           />
+          <div class="system-module-container" v-else>
+            <a-row>
+              <a-col :span="8" v-for="index in 8" :key="index">
+                <a-card class="system-module-card">
+                  <img slot="cover" :src="`${publicPath}img/temp/${index}.png`" :alt="index">
+                </a-card>
+              </a-col>
+            </a-row>
+          </div>
         </div>
       </dv-border-box-8>
-
       <dv-border-box-11 class="portion-1 padding-top-60" :color="[styles.mainThemeColor,styles.transparentColor]" title="数据动态">
         <div class="box-content-container">
           <dv-scroll-board :config="scrollBoard" class="scrollBoard"/>
         </div>
       </dv-border-box-11>
-
     </div>
     <div class="portion-2 column-container">
 
@@ -95,22 +103,31 @@ export default {
   },
   data () {
     this.moment = moment
-    this.defaultMapTabIndex = 1
     return {
+      publicPath: process.env.BASE_URL,
       styles,
       ...config,
-      mapConfig: {}
+      mapConfig: {},
+      centralModuleIndex: 1
     }
   },
   mounted () {
-    this.mapConfig = this.mapOptions[this.defaultMapTabIndex]
+    this.updateMapConfig(parseInt(this.centralModuleIndex))
   },
   methods: {
     mapTabChangedHandler (index) {
-        this.mapConfig = this.mapOptions[parseInt(index)]
-      }
+      this.centralModuleIndex = index
+      if (!Array.isArray(this.mapOptions)) return
+      this.updateMapConfig(parseInt(index))
+    },
+    updateMapConfig (index) {
+      if (index <= this.mapOptions.length - 1) {
+         this.mapConfig = this.mapOptions[index]
+       }
     }
+  }
 }
+
 </script>
 <style lang="less" scoped>
 @import "../../style/global-var.less";
@@ -138,6 +155,12 @@ export default {
       transform: translateX(-50%);
       z-index: 9999;
     }
+    .system-module-container {
+      .system-module-card {
+        background-color: fade(@main-theme-color, 10%);
+      }
+    }
+
   }
   .scrollBoard {
     color: @info-text-color
@@ -150,13 +173,13 @@ export default {
   }
 
   .scene-image-gallery{
-      margin-top:10px;
-      >div {
-        margin-right: 10px;
-        &:last-child{
-          margin-right: 0;
-        }
+    margin-top:10px;
+    >div {
+      margin-right: 10px;
+      &:last-child{
+        margin-right: 0;
       }
+    }
   }
 
 }

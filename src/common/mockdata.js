@@ -10,42 +10,42 @@ import MapOptionBuilder from './MapOptionBuilder'
 
  export const scrollBoard = {
 
-      header: ['站点', '属性', '数据状态', '变化量', '速度', '加速度'],
+      header: ['站点', '属性', '数据状态', '变化量', '速度', '加速度', '级别'],
       headerBGC: rgba(styles.mainThemeColor, 0.2),
       oddRowBGC: rgba(styles.mainThemeColor, 0.1),
       evenRowBGC: rgba(styles.mainThemeColor, 0.1),
       rowNum: 5,
       data: [
-        ['GX-DB02', 'DX', 'OK', '2.38 mm', '0.45 mm/d', '-0.46 mm/d^2'],
-        ['2号孔(9m)', 'DXY', 'OK', '0.35 mm', '0.06 mm/d', '-0.17 mm/d^2'],
-        ['GX-DB02', 'DY', 'OK', '7.48 mm', '1.43 mm/d', '-1.12 mm/d^2'],
-        ['一号点', 'DXY', 'OK', '0.60 mm', '0.18 mm/d', '-0.27 mm/d^2'],
-        ['二号点', 'DXY', 'OK', '0.68 mm', '0.15 mm/d', '1.53 mm/d^2'],
-        ['DB2', 'DX', 'OK', '-0.98 mm', '-0.14 mm/d', '0.13 mm/d^2'],
-        ['5号孔(15m)', 'DX', 'OK', '-0.35 mm', '-0.05 mm/d', '0.14 mm/d^2']
+        ['GX-DB02', 'DX', '有效', '2.38 mm', '0.45 mm/d', '-0.46 mm/d^2', 'I'],
+        ['2号孔(9m)', 'DXY', '有效', '0.35 mm', '0.06 mm/d', '-0.17 mm/d^2', 'I'],
+        ['GX-DB02', 'DY', '有效', '7.48 mm', '1.43 mm/d', '-1.12 mm/d^2', 'I'],
+        ['一号点', 'DXY', '有效', '0.60 mm', '0.18 mm/d', '-0.27 mm/d^2', 'I'],
+        ['二号点', 'DXY', '有效', '0.68 mm', '0.15 mm/d', '1.53 mm/d^2', 'I'],
+        ['DB2', 'DX', '有效', '-0.98 mm', '-0.14 mm/d', '0.13 mm/d^2', 'I'],
+        ['5号孔(15m)', 'DX', '有效', '-0.35 mm', '-0.05 mm/d', '0.14 mm/d^2', 'I']
       ],
       align: ['center', 'center', 'center']
     }
 
 export const projectStats = [
   {
-      number: 92,
+      number: 302, // 92,
       name: '边坡'
   },
   {
-      number: 11,
+      number: 31, // 11,
       name: '桥梁'
   },
   {
-      number: 3,
+      number: 26, // 3,
       name: '隧道'
   },
   {
-      number: 3,
+      number: 15, // 3,
       name: '矿山'
   },
   {
-      number: 2,
+      number: 10, // 2,
       name: '尾矿库'
   }
 ]
@@ -166,7 +166,7 @@ export const pieChart = {
 ]
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line
 function generateLinesDatas (arrs, toCoord) {
   return arrs.map(item => {
     return {
@@ -186,7 +186,7 @@ function generateLinesDatas (arrs, toCoord) {
   })
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line
 function generateScatterDatas (arrs) {
   return arrs.map(item => {
         return [item.longitude, item.latitude, 1]

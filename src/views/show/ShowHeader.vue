@@ -1,7 +1,7 @@
 <template>
   <header class="header clearfix">
     <TabControl :datas="['日常管理','应急响应']" spaceBetween hasRadius boldBorder class="float-left"/>
-    <h1 class="header-title">地质灾害与工程安全智能监测云平台</h1>
+    <h1 class="header-title">灾害地质与工程安全智能监测云平台</h1>
     <Clock class="float-right"/>
   </header>
 </template>
