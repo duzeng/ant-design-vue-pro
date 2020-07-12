@@ -71,7 +71,7 @@
           <TabControl :datas="projects" :defaultTabIndex="1"/>
           <div class="portion-2" style="margin-top:20px;">
             <Camera v-if="videoInfos.length>0" :video="videoInfos[0]"/>
-            <!-- <img width="100%" height="100%" src="https://server.zhilicloud.net:8619/files/projects/430922_BP_TJHYD/scene/1591052156_0c891505-3047-4790-b553-b60cf8fb5f98_1591052157.jpg"> -->
+            <img v-else width="100%" height="100%" src="https://server.zhilicloud.net:8619/files/projects/430922_BP_TJHYD/scene/1591052156_0c891505-3047-4790-b553-b60cf8fb5f98_1591052157.jpg">
           </div>
           <div class="portion-1 row-container scene-image-gallery">
             <div class="portion-1">
@@ -122,8 +122,8 @@ export default {
   },
   methods: {
     async init () {
-        this.videoInfos = (await listVideos(93)).result
-        this.updateMapConfig(parseInt(this.centralModuleIndex))
+      this.updateMapConfig(this.centralModuleIndex)
+      this.videoInfos = (await listVideos(93)).result
     },
     mapTabChangedHandler (index) {
       this.centralModuleIndex = index
@@ -140,7 +140,7 @@ export default {
 
 </script>
 <style lang="less" scoped>
-@import "../../style/global-var.less";
+@import "~@/style/global-var.less";
 
 .main{
   color:#fff;

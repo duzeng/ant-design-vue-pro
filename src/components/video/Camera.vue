@@ -65,9 +65,9 @@ export default {
 }
 </script>
 
-<style>
-  .video-cantainer{
-	  border: 1px solid #006600;
+<style lang="less" scoped>
+  .video-cantainer {
+    border: 1px solid #006600;
     display: block;
   }
 </style>

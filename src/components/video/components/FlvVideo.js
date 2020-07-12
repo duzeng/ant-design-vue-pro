@@ -1,7 +1,7 @@
 import flvjs from 'flv.js'
 
 class FlvVideo {
-  constructor(url, videoElement) {
+  constructor (url, videoElement) {
     this._url = url
     this.videoElement = videoElement
     this.flvPlayer = null
@@ -13,27 +13,27 @@ class FlvVideo {
     }
   }
 
-  get url() {
+  get url () {
     return this._url
   }
-  set url(value) {
+  set url (value) {
     this._url = value
   }
 
-  get featureInfo() {
+  get featureInfo () {
     return flvjs.getFeatureList || ''
   }
 
-  get supportInfo() {
+  get supportInfo () {
     return flvjs.isSupported() ? '' : '此浏览器不支持播放器'
   }
 
-  start() {
+  start () {
     this._init()
     this._link()
   }
 
-  stop() {
+  stop () {
     // this.videoElement && this.videoElement.removeEventListener("canplay", this.e.canplayHandler);
     if (typeof this.flvPlayer !== 'undefined') {
       if (this.flvPlayer != null) {
@@ -44,13 +44,13 @@ class FlvVideo {
     }
   }
 
-  _reconnect() {
+  _reconnect () {
     this.stop()
     this._init()
     this._link()
   }
 
-  _destroy() {
+  _destroy () {
     this.flvPlayer.pause()
     this.flvPlayer.unload()
     this.flvPlayer.detachMediaElement()
@@ -58,7 +58,7 @@ class FlvVideo {
     this.flvPlayer = null
   }
 
-  _init() {
+  _init () {
     if (!flvjs.isSupported()) {
       console.error('flvjs is not supported!')
       return
@@ -84,7 +84,7 @@ class FlvVideo {
     })
   }
 
-  _link() {
+  _link () {
     this.videoElement.addEventListener('canplay', this.e.canplayHandler)
 
     this.flvPlayer.on(flvjs.Events.LOADING_COMPLETE, this.e.loadingCompleteHandler)
@@ -95,12 +95,12 @@ class FlvVideo {
     // this.flvPlayer.play();
   }
 
-  __loadingCompleteHandler() {
+  __loadingCompleteHandler () {
     console.log(`${flvjs.Events.LOADING_COMPLETE} -> `)
     this._reconnect()
   }
 
-  __canplayHandler(...args) {
+  __canplayHandler (...args) {
     console.log(`videoelement canplay -> `)
     console.log(args)
     // if (this._receivedCanPlay) return;
@@ -110,7 +110,7 @@ class FlvVideo {
     this.videoElement.removeEventListener('canplay', this.e.canplayHandler)
   }
 
-  __errorHandler(errorType, errorDetail, info) {
+  __errorHandler (errorType, errorDetail, info) {
     console.log(`${flvjs.Events.ERROR} -> `)
     console.log([errorType, errorDetail, info])
     if (errorType === flvjs.ErrorTypes.NETWORK_ERROR &&

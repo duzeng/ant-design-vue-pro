@@ -10,9 +10,6 @@ export function currentTimestampMilisencond () {
 }
 
 export function timestampByYears (date, years) {
-  // const result = addYears(date, years)
-  // return Math.round(result.getTime() / 1000)
-  debugger
   return Math.round(moment(date).add(years, 'years').valueOf() / 1000)
 }
 

@@ -12,7 +12,6 @@ const videos = [
   ]
 
 Mock.mock(/\/api\/projects\/(\d+)\/videos/, 'get', (options) => {
-  debugger
   const reg = /\/api\/projects\/(\d+)\/videos/
   const result = reg.exec(options.url)
   const id = parseInt(result[1])

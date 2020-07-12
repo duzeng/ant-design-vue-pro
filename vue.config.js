@@ -31,6 +31,7 @@ const assetsCDN = {
 
 // vue.config.js
 const vueConfig = {
+  publicPath: process.env.NODE_ENV === 'production' ? '/webroot/' : '/',
   configureWebpack: {
     // webpack plugins
     plugins: [
