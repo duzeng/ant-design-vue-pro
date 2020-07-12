@@ -27,6 +27,15 @@ const colorList = [
   },
   {
     key: '酱紫', color: '#722ED1'
+  },
+  {
+    key: '致力蓝', color: '#22ADD6'
+  },
+  {
+    key: '致力橙', color: '#FE6608'
+  },
+  {
+    key: '致力灰', color: '86898E'
   }
 ]
 

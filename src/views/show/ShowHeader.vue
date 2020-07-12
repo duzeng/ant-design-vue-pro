@@ -1,6 +1,13 @@
 <template>
   <header class="header clearfix">
-    <TabControl :datas="['日常管理','应急响应']" spaceBetween hasRadius boldBorder class="float-left"/>
+    <TabControl
+      :datas="['日常管理','应急响应','简介']"
+      spaceBetween
+      hasRadius
+      boldBorder
+      class="header-tab-container float-left"
+      :defaultTabIndex="2"
+      @tab-changed="tabChangedHandler"/>
     <h1 class="header-title">灾害地质与工程安全智能监测云平台</h1>
     <Clock class="float-right"/>
   </header>
@@ -22,6 +29,9 @@ export default {
   beforeDestroy () {
   },
   methods: {
+    tabChangedHandler (index) {
+      this.$emit('content-changeed', index)
+    }
   }
 
 }
@@ -33,6 +43,9 @@ export default {
     padding:30px 20px 0;
     text-align: center;
     position: relative;
+    .header-tab-container {
+      width:300px;
+    }
     .header-title{
       color:@main-theme-color;
       position: absolute;

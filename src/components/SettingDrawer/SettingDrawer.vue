@@ -181,6 +181,7 @@ export default {
   },
   mixins: [],
   data () {
+    console.log(colorList)
     return {
       visible: false,
       colorList

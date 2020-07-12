@@ -70,7 +70,8 @@
         <div class="box-content-container column-container padding-top-60">
           <TabControl :datas="projects" :defaultTabIndex="1"/>
           <div class="portion-2" style="margin-top:20px;">
-            <img width="100%" height="100%" src="https://server.zhilicloud.net:8619/files/projects/430922_BP_TJHYD/scene/1591052156_0c891505-3047-4790-b553-b60cf8fb5f98_1591052157.jpg">
+            <Camera v-if="videoInfos.length>0" :video="videoInfos[0]"/>
+            <!-- <img width="100%" height="100%" src="https://server.zhilicloud.net:8619/files/projects/430922_BP_TJHYD/scene/1591052156_0c891505-3047-4790-b553-b60cf8fb5f98_1591052157.jpg"> -->
           </div>
           <div class="portion-1 row-container scene-image-gallery">
             <div class="portion-1">
@@ -94,12 +95,16 @@ import TabControl from '@/components/TabControl'
 import WeatherBoard from '@/components/WeatherBoard'
 import ProjectSumBar from '@/components/ProjectSumBar'
 import * as styles from '@/style/global-var.js'
+import { listVideos } from '@/api/video'
+import Camera from '@/components/video/Camera'
+
 export default {
   components: {
     LedBoard,
     TabControl,
     WeatherBoard,
-    ProjectSumBar
+    ProjectSumBar,
+    Camera
   },
   data () {
     this.moment = moment
@@ -108,13 +113,18 @@ export default {
       styles,
       ...config,
       mapConfig: {},
-      centralModuleIndex: 1
+      centralModuleIndex: 1,
+      videoInfos: []
     }
   },
   mounted () {
-    this.updateMapConfig(parseInt(this.centralModuleIndex))
+    this.init()
   },
   methods: {
+    async init () {
+        this.videoInfos = (await listVideos(93)).result
+        this.updateMapConfig(parseInt(this.centralModuleIndex))
+    },
     mapTabChangedHandler (index) {
       this.centralModuleIndex = index
       if (!Array.isArray(this.mapOptions)) return
