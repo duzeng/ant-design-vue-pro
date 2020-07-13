@@ -27,28 +27,29 @@ import MapOptionBuilder from './MapOptionBuilder'
       align: ['center', 'center', 'center']
     }
 
-export const projectStats = [
-  {
-      number: 302, // 92,
-      name: '边坡'
-  },
-  {
-      number: 31, // 11,
-      name: '桥梁'
-  },
-  {
-      number: 26, // 3,
-      name: '隧道'
-  },
-  {
-      number: 15, // 3,
-      name: '矿山'
-  },
-  {
-      number: 10, // 2,
-      name: '尾矿库'
-  }
-]
+// export const projectStats = [
+//   {
+//       number: 302, // 92,
+//       name: '边坡'
+//   },
+//   {
+//       number: 31, // 11,
+//       name: '桥梁'
+//   },
+//   {
+//       number: 26, // 3,
+//       name: '隧道'
+//   },
+//   {
+//       number: 15, // 3,
+//       name: '矿山'
+//   },
+//   {
+//       number: 10, // 2,
+//       name: '尾矿库'
+//   }
+// ]
+
 export const projects = [
  '水府庙大桥', '滑油洞尾矿库', '永定0401滑坡'
 ]

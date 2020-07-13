@@ -70,7 +70,7 @@
         <div class="box-content-container column-container padding-top-60">
           <TabControl :datas="projects" :defaultTabIndex="1"/>
           <div class="portion-2" style="margin-top:20px;">
-            <Camera v-if="videoInfos.length>0" :video="videoInfos[0]"/>
+            <Camera v-if="videoInfos.length>0" :video="videoInfos[videoInfos.length-1]"/>
             <img v-else width="100%" height="100%" src="https://server.zhilicloud.net:8619/files/projects/430922_BP_TJHYD/scene/1591052156_0c891505-3047-4790-b553-b60cf8fb5f98_1591052157.jpg">
           </div>
           <div class="portion-1 row-container scene-image-gallery">
@@ -96,6 +96,8 @@ import WeatherBoard from '@/components/WeatherBoard'
 import ProjectSumBar from '@/components/ProjectSumBar'
 import * as styles from '@/style/global-var.js'
 import { listVideos } from '@/api/video'
+import { listProjectStats } from '@/api/projects'
+
 import Camera from '@/components/video/Camera'
 
 export default {
@@ -114,7 +116,8 @@ export default {
       ...config,
       mapConfig: {},
       centralModuleIndex: 1,
-      videoInfos: []
+      videoInfos: [],
+      projectStats: []
     }
   },
   mounted () {
@@ -123,7 +126,8 @@ export default {
   methods: {
     async init () {
       this.updateMapConfig(this.centralModuleIndex)
-      this.videoInfos = (await listVideos(93)).result
+      this.videoInfos = (await listVideos(56)).result
+      this.projectStats = (await listProjectStats()).result
     },
     mapTabChangedHandler (index) {
       this.centralModuleIndex = index
