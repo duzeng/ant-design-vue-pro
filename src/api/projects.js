@@ -13,3 +13,10 @@ export function listProjectStats () {
     method: 'get'
   })
 }
+
+export function listSpecialProjects () {
+  return request({
+    url: '/specialProjects',
+    method: 'get'
+  })
+}

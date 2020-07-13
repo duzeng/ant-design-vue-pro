@@ -96,7 +96,7 @@ import WeatherBoard from '@/components/WeatherBoard'
 import ProjectSumBar from '@/components/ProjectSumBar'
 import * as styles from '@/style/global-var.js'
 import { listVideos } from '@/api/video'
-import { listProjectStats } from '@/api/projects'
+import { listSpecialProjects, listProjectStats } from '@/api/projects'
 
 import Camera from '@/components/video/Camera'
 
@@ -117,7 +117,8 @@ export default {
       mapConfig: {},
       centralModuleIndex: 1,
       videoInfos: [],
-      projectStats: []
+      projectStats: [],
+      specialProjects: []
     }
   },
   mounted () {
@@ -128,6 +129,7 @@ export default {
       this.updateMapConfig(this.centralModuleIndex)
       this.videoInfos = (await listVideos(56)).result
       this.projectStats = (await listProjectStats()).result
+      this.specialProjects = (await listSpecialProjects()).result
     },
     mapTabChangedHandler (index) {
       this.centralModuleIndex = index

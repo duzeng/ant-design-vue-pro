@@ -2,9 +2,8 @@ import * as styles from '@/style/global-var.js'
 // eslint-disable-next-line  no-unused-vars
 import * as echarts from 'echarts'
 import { rgba } from '@/utils/rgbHelper'
-// eslint-disable-next-line no-unused-vars
+
 import myProjects from './projects.json'
-import { quickSort } from '@/utils/sort'
 
 import MapOptionBuilder from './MapOptionBuilder'
 
@@ -27,35 +26,10 @@ import MapOptionBuilder from './MapOptionBuilder'
       align: ['center', 'center', 'center']
     }
 
-// export const projectStats = [
-//   {
-//       number: 302, // 92,
-//       name: '边坡'
-//   },
-//   {
-//       number: 31, // 11,
-//       name: '桥梁'
-//   },
-//   {
-//       number: 26, // 3,
-//       name: '隧道'
-//   },
-//   {
-//       number: 15, // 3,
-//       name: '矿山'
-//   },
-//   {
-//       number: 10, // 2,
-//       name: '尾矿库'
-//   }
-// ]
-
 export const projects = [
  '水府庙大桥', '滑油洞尾矿库', '永定0401滑坡'
 ]
 
-export const specialProjects = quickSort(myProjects.filter(item =>
-  item.projectStatusCode !== 0 && item.projectStatusCode !== 300), { key: 'projectStatusCode', desc: true }).slice(0, 6)
 export const pieChart = {
 
   legend: {
@@ -188,18 +162,26 @@ function generateLinesDatas (arrs, toCoord) {
 }
 
 // eslint-disable-next-line
-function generateScatterDatas (arrs) {
+function generateScatterDatas (arrs,size=10) {
   return arrs.map(item => {
-        return [item.longitude, item.latitude, 1]
+        return [item.longitude, item.latitude, size, item.name]
   })
 }
 
-export const mapOptions = [new MapOptionBuilder({ center: [113.004, 27.515] })
-.effectScatter(generateScatterDatas(myProjects), '#b0eeff')
+const monitoringCenter = [
+  { longitude: 112.88193, latitude: 28.12679, name: '灾害地质与工程安全监测中心' },
+  { longitude: 112.930791, latitude: 27.837833, name: '湘潭市地震和地质灾害应急救援中心' },
+  { longitude: 114.142079, latitude: 24.423016, name: '南粤交通仁博高速公路管理监控中心' }
+]
+const mapCenter = [monitoringCenter[0].longitude, monitoringCenter[0].latitude]
+export const mapOptions = [new MapOptionBuilder({ center: mapCenter })
+.scatter(generateScatterDatas(myProjects), styles.lightNumberColor)
+.effectScatter(generateScatterDatas(monitoringCenter, 20), '#b0eeff', 3)
 .build(),
 
-  new MapOptionBuilder({ center: [113.004, 27.515] })
-.effectScatter([[113.004, 27.515, 1]], '#b0eeff')
-.lines([{ coords: [[114, 28], [113.004, 27.515]] }, ...generateLinesDatas(myProjects, [113.004, 27.515])], styles.lightNumberColor)
+  new MapOptionBuilder({ center: mapCenter })
+  .effectScatter([generateScatterDatas(monitoringCenter, 20)[0]], '#b0eeff', 3)
+// .effectScatter([[113.004, 27.515, 25]], '#b0eeff',3)
+.lines([{ coords: [[114, 28], mapCenter] }, ...generateLinesDatas(myProjects, mapCenter)], styles.lightNumberColor)
 .build()
 ]

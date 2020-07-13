@@ -6,16 +6,29 @@ export default class MapOptionBuilder {
     this.series = []
   }
 
-  effectScatter (data, color) {
+  effectScatter (data, color, dataIndex4LableName) {
     const obj = {
       type: 'effectScatter',
       coordinateSystem: 'bmap',
-      symbolSize: 10,
+      symbolSize: (value, data) => value[2],
       itemStyle: {
-        color: color
+        color: color,
+        shadowBlur: 10,
+        shadowColor: '#333'
       },
+      showEffectOn: 'render',
       rippleEffect: {
-        scale: 5
+        // scale: 3,
+        brushType: 'stroke'
+      },
+      hoverAnimation: true,
+      label: {
+        formatter: (params) => {
+          return params.data[dataIndex4LableName]
+        },
+        position: 'right',
+        fontSize: 16,
+        show: true
       },
       data: [
         ...data // 经度，纬度，value，...
@@ -30,7 +43,7 @@ export default class MapOptionBuilder {
     const obj = {
       type: 'scatter',
       coordinateSystem: 'bmap',
-      symbolSize: 30,
+      symbolSize: (value, params) => value[2],
       itemStyle: {
         color: color
       },
