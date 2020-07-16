@@ -68,9 +68,22 @@
       </dv-border-box-11>
       <dv-border-box-11 class="portion-2" :color="[styles.mainThemeColor,styles.transparentColor]" title="现场实景">
         <div class="box-content-container column-container padding-top-60">
-          <TabControl :datas="projects" :defaultTabIndex="1"/>
-          <div class="portion-2" style="margin-top:20px;">
-            <Camera v-if="videoInfos.length>0" :video="videoInfos[videoInfos.length-1]"/>
+          <div class="portion-2 camera-container" style="margin-top:20px;">
+            <a-button
+              class="camera-nav-btn left"
+              type="link"
+              ghost
+              size="large"
+              icon="left"
+              @click="cameraPreHandler"/>
+            <a-button
+              class="camera-nav-btn right"
+              type="link"
+              ghost
+              size="large"
+              icon="right"
+              @click="cameraNextHandler"/>
+            <Camera v-if="videoInfos.length>0" :video="videoInfos[currentVideoIndex]"/>
             <img v-else width="100%" height="100%" src="https://server.zhilicloud.net:8619/files/projects/430922_BP_TJHYD/scene/1591052156_0c891505-3047-4790-b553-b60cf8fb5f98_1591052157.jpg">
           </div>
           <div class="portion-1 row-container scene-image-gallery">
@@ -118,7 +131,8 @@ export default {
       centralModuleIndex: 1,
       videoInfos: [],
       projectStats: [],
-      specialProjects: []
+      specialProjects: [],
+      currentVideoIndex: 0
     }
   },
   mounted () {
@@ -128,6 +142,7 @@ export default {
     async init () {
       this.updateMapConfig(this.centralModuleIndex)
       this.videoInfos = (await listVideos(56)).result
+      if (this.videoInfos.length > 0) { this.currentVideoIndex = 0 }
       this.projectStats = (await listProjectStats()).result
       this.specialProjects = (await listSpecialProjects()).result
     },
@@ -140,6 +155,18 @@ export default {
       if (index <= this.mapOptions.length - 1) {
          this.mapConfig = this.mapOptions[index]
        }
+    },
+    cameraPreHandler () {
+      this.currentVideoIndex--
+      if (this.currentVideoIndex < 0) {
+        this.currentVideoIndex = this.videoInfos.length - 1
+      }
+    },
+    cameraNextHandler () {
+      this.currentVideoIndex++
+      if (this.currentVideoIndex > this.videoInfos.length - 1) {
+        this.currentVideoIndex = 0
+      }
     }
   }
 }
@@ -194,6 +221,22 @@ export default {
       margin-right: 10px;
       &:last-child{
         margin-right: 0;
+      }
+    }
+  }
+
+  .camera-container {
+    position: relative;
+    .camera-nav-btn {
+      position: absolute;
+      z-index: 999;
+      top:50%;
+      transform: translateY(-50%);
+      &.left {
+        left: 2%;
+      }
+      &.right {
+        right:2%;
       }
     }
   }

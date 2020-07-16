@@ -33,7 +33,14 @@ export default {
       } else {
         this.stop()
       }
+    },
+    video: function (newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.stop()
+        this.start()
+      }
     }
+
   },
   computed: {
   },
