@@ -11,13 +11,6 @@
     :i18nRender="i18nRender"
     v-bind="settings"
   >
-    <!-- Ads begin
-      广告代码 真实项目中请移除
-      production remove this Ads
-    -->
-    <ads v-if="isProPreviewSite && !collapsed"/>
-    <!-- Ads end -->
-
     <setting-drawer :settings="settings" @change="handleSettingChange" />
     <template v-slot:rightContentRender>
       <right-content :top-menu="settings.layout === 'topmenu'" :is-mobile="isMobile" :theme="settings.theme" />
@@ -38,19 +31,19 @@ import { SIDEBAR_TYPE, TOGGLE_MOBILE_TYPE } from '@/store/mutation-types'
 import defaultSettings from '@/config/defaultSettings'
 import RightContent from '@/components/GlobalHeader/RightContent'
 import GlobalFooter from '@/components/GlobalFooter'
-import Ads from '@/components/Other/CarbonAds'
-import LogoSvg from '../assets/logo.svg?inline'
+ import LogoSvg from '../assets/v_zero.svg?inline'
+import ZhiliLogo from '../assets/logo/zhili_logo.png'
 
 export default {
   name: 'BasicLayout',
   components: {
     SettingDrawer,
     RightContent,
-    GlobalFooter,
-    Ads
+    GlobalFooter
   },
   data () {
     return {
+      ZhiliLogo,
       // preview.pro.antdv.com only use.
       isProPreviewSite: process.env.VUE_APP_PREVIEW === 'true' && process.env.NODE_ENV !== 'development',
       // end
@@ -153,7 +146,7 @@ export default {
       }
     },
     logoRender () {
-      return <LogoSvg />
+       return <LogoSvg />
     }
   }
 }
@@ -161,4 +154,10 @@ export default {
 
 <style lang="less">
 @import "./BasicLayout.less";
+.ant-pro-sider-menu-logo {
+  img {
+    width: 32px;
+    height: 32px;
+  }
+}
 </style>

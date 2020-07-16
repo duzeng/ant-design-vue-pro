@@ -6,7 +6,7 @@
       hasRadius
       boldBorder
       class="header-tab-container float-left"
-      :defaultTabIndex="2"
+      :defaultTabIndex="defaultTabIndex"
       @tab-changed="tabChangedHandler"/>
     <h1 class="header-title">灾害地质与工程安全智能监测云平台</h1>
     <Clock class="float-right"/>
@@ -20,6 +20,12 @@ export default {
     Clock,
     TabControl
   },
+  props: {
+    defaultTabIndex: {
+      type: Number,
+      default: 0
+    }
+  },
   data () {
     return {
     }
@@ -30,14 +36,14 @@ export default {
   },
   methods: {
     tabChangedHandler (index) {
-      this.$emit('content-changeed', index)
+      this.$emit('content-changed', index)
     }
   }
 
 }
 </script>
 <style lang="less" scoped>
-@import "../../style/global-var.less";
+@import "~@/style/global-var.less";
 
   .header{
     padding:30px 20px 0;

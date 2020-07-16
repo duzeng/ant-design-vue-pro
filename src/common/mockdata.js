@@ -9,7 +9,7 @@ import MapOptionBuilder from './MapOptionBuilder'
 
  export const scrollBoard = {
 
-      header: ['站点', '属性', '数据状态', '变化量', '速度', '加速度', '级别'],
+      header: ['站点', '属性', '数据状态', '周期变形量', '变形速率', '变形加速度', '级别'],
       headerBGC: rgba(styles.mainThemeColor, 0.2),
       oddRowBGC: rgba(styles.mainThemeColor, 0.1),
       evenRowBGC: rgba(styles.mainThemeColor, 0.1),

@@ -2,22 +2,25 @@
   <div class="bg-container full-conainer column-container">
     <dv-border-box-9 style="height:120px;">
       <div class="box-content-container">
-        <show-header @content-changeed="contentChangedHandler"></show-header>
+        <show-header :defaultTabIndex="contentIndex" @content-changed="contentChangedHandler"></show-header>
       </div>
     </dv-border-box-9>
     <show-main class="portion-1" v-if="contentIndex===0"></show-main>
     <div v-else-if="contentIndex===1">other</div>
-    <div v-else> 向导</div>
+    <ShowGuide v-else />
   </div>
 </template>
 
 <script>
 import ShowHeader from '@/views/show/ShowHeader'
 import ShowMain from '@/views/show/ShowMain'
+import ShowGuide from '@/views/show/ShowGuide'
+
 export default {
   components: {
     ShowHeader,
-    ShowMain
+    ShowMain,
+    ShowGuide
   },
   data () {
     return {

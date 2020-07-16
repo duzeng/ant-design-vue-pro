@@ -33,7 +33,7 @@
         <div class=" box-content-container map-container">
           <TabControl
             class="map-tab"
-            :datas="['项目地图','数据地图','九大模块']"
+            :datas="['项目分布','数据地图','功能模块']"
             :defaultTabIndex="centralModuleIndex"
             @tab-changed="mapTabChangedHandler"/>
           <ve-bmap
@@ -53,7 +53,7 @@
           </div>
         </div>
       </dv-border-box-8>
-      <dv-border-box-11 class="portion-1 padding-top-60" :color="[styles.mainThemeColor,styles.transparentColor]" title="数据动态">
+      <dv-border-box-11 class="portion-1 padding-top-60" :color="[styles.mainThemeColor,styles.transparentColor]" title="异常数据告警">
         <div class="box-content-container">
           <dv-scroll-board :config="scrollBoard" class="scrollBoard"/>
         </div>
@@ -61,7 +61,7 @@
     </div>
     <div class="portion-2 column-container">
 
-      <dv-border-box-11 title="重点关注" :color="[styles.mainThemeColor,styles.transparentColor]">
+      <dv-border-box-11 title="项目预警" :color="[styles.mainThemeColor,styles.transparentColor]">
         <div class="box-content-container padding-top-60">
           <ProjectSumBar :projects="specialProjects" />
         </div>
